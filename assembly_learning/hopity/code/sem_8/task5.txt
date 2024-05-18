@@ -1,0 +1,18 @@
+class A
+{
+    public:
+        int x;
+        A(): x{1}, y{2} {}
+        A(int xx, int yy) { x = xx; y = yy; }
+        void print() { std::cout << x << ' ' << y << std::endl; }
+    private:
+
+};
+
+void some_func(int n)
+{
+    A a;
+    a.print();
+    a.x = 50;
+    a.print();
+}

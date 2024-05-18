@@ -1,0 +1,32 @@
+struct Test
+{
+    int *p;
+    struct
+    {
+        int x;
+        int y;
+    } s;
+    struct Test *next;
+};
+
+void st_init(struct Test* st)
+{
+    st->s.y = s.x;
+    st->p = &s.y;
+    st->next = st->p;
+}
+
+p:      0
+s.x:    8
+s.y:    12
+next:   16
+
+st_init:
+            s.x    tmp
+    movl 8(%rdi), %eax
+          tmp      s.y
+    movl %eax, 12(%rdi)
+    leaq 12(%rdi), %rax
+    movq %rax, (%rdi)
+    movq %rdi, 16(%rdi)
+    ret

@@ -1,0 +1,13 @@
+#define OP
+long arith (long long x) { return x OP 8; }
+
+x: %rdi
+
+arith:
+    leaq 7(%rdi), %rax  # x + 7
+    testq %rdi, %rdi    # x ? есть ли знак
+    cmovns %rdi, %rax   # если x >= 0, то копируем
+    sarq $3, %rax       # сдвигаем на 3 вправо
+    ret                 # return r;
+
+OP = /

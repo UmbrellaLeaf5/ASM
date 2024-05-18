@@ -1,0 +1,7 @@
+movb $0xF, (%ebx) -> movb $0xF, (%rbx)
+movl %rax, (%rsp) -> movq %rax, (%rsp)
+movw (%rax), 4(%rsp) -> (M -> M нелья)
+movb %al, %sl -> movb %al, %bl (регистра %sl - нет)
+movq %rax, $0x123 -> (нельзя копировать в константу)
+movl %eax, %rdx -> movl %eax, %edx (из 4 байт в 8 байт)
+movb %si, 8(%rbp) -> movw %si, 8(%rbp)

@@ -1,0 +1,12 @@
+Задание:
+
+%rbx: p
+%rdx: q
+
+Инструкция                            результат
+leaq    9(%rdx), %rax                 9+q                   
+leaq    (%rdx, %rbx), %rax            q+p
+leaq    (%rdx, %rbx, 4), %rax         q+p*4
+leaq    2(%rbx, %rbx, 8), %rax        2+q+p*8
+leaq    0xE(, %rdx, 2), %rax          14+2*q  
+leaq    6(%rbx, %rdx, 8) %rax         6+p+q*8

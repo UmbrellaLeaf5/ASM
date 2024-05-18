@@ -1,0 +1,88 @@
+-mabi=sysv
+
+-f no-pie
+
+-static
+
+SWITCH (HOLY SHIT)
+
+switch(expr)
+{
+    case label1:    5
+    {               /6/ - default
+        body1       7
+        break;      /8/ - default
+    }
+    case label2:
+        body2
+        break;
+    default:
+        body
+}
+
+jump_table
+
+            _____________
+    case1   |           |
+            |   адреса  |
+    case2   |   блоков  |
+            |   case    |
+            |___________|
+
+адрес таблицы
+(0)         min
+
+            default
+            default
+        
+(max_min)   max
+
+__________________________________________________________________________________
+
+continue:
+
+while:
+    continue; (jmp to while)
+
+for:
+    continue; (inc + jmp to for)
+
+__________________________________________________________________________________
+
+Процедуры
+
+таблица перехода находится в данных
+
+                    UNIX
+            /   rdi \    1st argument
+            |   rsi |
+callersaved |   rdx |
+            |   rcx |
+            |   r8  |
+            |   r9  /    6th argument
+            |   r10
+            |   r11
+            \   rax
+
+rbp
+rsp - верхушка стэка
+
+
+            / r12-r15
+callersaved |
+            \ rbx, 
+            
+f(a1, a2, a3, a4, a5, a6, a7, a8)
+
+                    |______a8______|
+                    |______a7______|
+кадр стека          |              | <- rbp
+функции             |              |
+                    |              |
+                    |              |
+                    |              |
+                    |______________| <- rsp
+
+call - сохраняет адрес возврата
+call
+ret

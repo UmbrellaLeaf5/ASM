@@ -1,0 +1,69 @@
+Альтернативное правило для трансляции операторов if в goto-код выглядит следующим
+образом:
+
+t = условное-выражение;
+if (t)
+    goto true;
+инструкция-else
+goto done;
+true:
+    инструкция-then
+done:
+
+1. Напишите goto-версию функции absdiff_se, руководствуясь этим альтернативным правилом.
+2. Сможете ли вы найти хоть одну причину, почему следовало бы предпочесть то или иное
+правило?
+
+Функция в изначальном виде:
+
+long absdiff_se(long x, long y)
+{
+    long result;
+    if (x < y)
+    {
+        lt_cnt++;
+        result = y - x;
+    }
+    else
+    {
+        ge_cnt++;
+        result = x - y;
+    }
+    return result;
+}
+
+__________________________________________________________________________________
+
+1.
+long absdiff_se(long x, long y)
+{
+    long result;
+    if (x < y)
+        goto true;
+    ge_cnt++;
+    result = x - y;
+    goto done;
+    true:
+        lt_cnt++;
+        result = y - x;
+    done:
+        return result;
+}
+
+alternative:
+
+long absdiff_se(long x, long y)
+{
+    long result;
+    if (x < y)
+        goto true;
+    ge_cnt++;
+    result = x - y;
+    return result;
+    true:
+        lt_cnt++;
+        result = y - x;
+        return result;
+}
+
+2. Не могу найти

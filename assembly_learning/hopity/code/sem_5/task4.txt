@@ -1,0 +1,29 @@
+void funcs_num(int K, long* pnum_func)
+{
+    if (pnum_func && K >= 0)
+        *pnum_func = (K+1)*(K+2)*(K+3)/2;
+    else
+        *pnum_func = 1;
+}
+
+K: %edi
+pnum_func: %rsi
+
+funcs_num:
+    testq %rsi, %rsi
+    je .else
+    testl %edi, %edi
+    jl .else
+    movl %edi, %r8d
+    incl %r8d
+    movl %r8d, %r9d
+    incl %r8d
+    imull %r8d, %r9d
+    incl %r8d
+    imull %r8d, %r9d
+    sarl %r9d
+    movq %r9d (%rsi)
+    ret
+.else
+    movq $1, (%rsi)
+    ret

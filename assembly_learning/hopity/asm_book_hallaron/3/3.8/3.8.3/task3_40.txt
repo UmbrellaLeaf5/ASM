@@ -1,0 +1,34 @@
+Следующий код на C присваивает диагональным элементам одного из наших массивов фиксированного размера значение val:
+/* Присваивает всем диагональным элементам значение val */
+
+void fix_set_diag(fix_matrix A, int val)
+{
+    long i;
+    for (i = 0; i < N; i++)
+    A[i][i] = val;
+}
+
+При компиляции с уровнем оптимизации –O1 GCC сгенерировал следующий ассемблерный код:
+
+    void fix_set_diag(fix_matrix A, int val)
+    A в %rdi, val в %rsi
+fix_set_diag:
+    movl $0, %eax
+    .L13:
+    movl %esi, (%rdi,%rax)
+    addq $68, %rax
+    cmpq $1088, %rax
+    jne .L13
+    rep; ret
+
+___________________________________________________________________________________________
+
+void fix_set_diag(fix_matrix A, int val)
+{
+    int* cr_ptr = &A[0][0];
+    int* end_ptr = &A[N][N];
+    {
+        *cr_ptr = val;
+        cr_ptr += N+1;
+    }while(cr_ptr != end_ptr);
+}

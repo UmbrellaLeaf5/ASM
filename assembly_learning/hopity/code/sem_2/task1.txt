@@ -1,0 +1,20 @@
+4004d0: 4f 81 ec e0 02 00 00    sub $0x2e0, %rsp
+        48 db 44 24 a8          mov -0x58(%rsp), %rax
+        48 03 47 28             add 0x28(%rdi), %rax
+        ..
+        48 8b 84 24 f8 01 00    mov 0x1f8(%rsp), %rax
+
+/*
+
+number is [number]
+
+the order of bytes is reversed
+
+4004d0: 4f 81 ec [e0 02 00 00]   sub $0x2e0, %rsp        (1) Обратный порядок байт при хранении
+                                                            little endian
+                                                            (Intel)
+        48 db 44 24 [a8]          mov -0x58(%rsp), %rax   (2) X_m + (-X_m) = 0_m (100..<m time>..00) 
+        48 03 47 [28]            add 0x28(%rdi), %rax
+        ..
+        48 8b 84 24 f8 01 00    mov 0x1f8(%rsp), %rax
+*/

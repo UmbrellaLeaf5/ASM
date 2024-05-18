@@ -1,0 +1,13 @@
+.L3
+    movq    (%rdx),  %rcx
+    movq    (%rax),  %rsi
+    movq    %rsi,   (%rdx)
+    movq    %rcx,   (%rax)
+    addq    $8,     %rdx
+    addq    $120,   %rax
+    cmpq    %r8,    %rax
+    jne     .L3
+
+A[i][j] ?   %rdx
+A[j][i] ?   %rax
+M       ?   15

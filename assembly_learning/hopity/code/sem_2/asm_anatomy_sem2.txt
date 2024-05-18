@@ -1,0 +1,78 @@
+    .data | .bss             # сегмент данных (1) глобальные переменные (.bss - неинициализированные данные)
+                             #                (2) статические переменные
+var2:
+    .byte 'a'
+    .bss
+var:
+    .zero 4
+    .text               # сегмент кода
+    .globl func
+func:
+    команды
+    mnemonic [op1[, op2, [, op3]]] code
+    mov
+    add
+    sub
+    ref
+|___| - пустая строка
+
+Регистры (x86_64):
+%rax, %eax, %ax, %al
+
+%rax - 0-63 bits
+%eax - 0-31 bits
+%ax  - 0-15 bits // accumulator
+%al  - 0-7  bits // 
+
+%rbx    base
+%rcx    counter
+%rdx    data
+
+%rsp    stack pointer
+%rbp    frame pointer
+%rsi    source index
+%rdi    destination index
+
+%r8  - %r15
+%r8d - 32-бит
+%r8w - 16-бит
+%r8b - 8-бит
+
+rflags
+%rip
+
+Формы операндов
+
+тип            форма                значение                    адресация
+
+константа      $Imm                 Imm                         непосредственная
+
+регистр        r_a                  R[r_a]                      регистровая
+
+память         Imm                  M[Imm]                      абсолютная
+               (r_a)                H[R[r_a]]                   косвенная
+               Imm(r_b, r_i, S)     M[Imm + R[r_b] + R[r_i]*s]  косвенная
+
+Доступ к данным
+
+mov        S,D        D<-S - скопировать
+movb                         байт
+movw                         слово (2 байта)
+movl                         двойное слово
+movq                        четверное слово
+movabsq    I,R        R<-I
+movz       S,D
+movzbw
+movzbl
+movzwl
+movzbq
+movzwq
+
+movq %rax, %rcx - копируем значение из одного регистра и присваиваем это значение другому (изменяем значение другого регистра)
+
+%rdx 8 q
+%edx 4 l
+%dx  2 w
+%dl  1 b
+
+регистр - участок в памяти процессора

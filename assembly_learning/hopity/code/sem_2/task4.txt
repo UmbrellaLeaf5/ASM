@@ -1,0 +1,8 @@
+Задание: перезаписать из long long в int
+
+%r8 %r8d
+%r9d
+
+b = static_cast<int>(a)
+
+movl %r9d, %r8d

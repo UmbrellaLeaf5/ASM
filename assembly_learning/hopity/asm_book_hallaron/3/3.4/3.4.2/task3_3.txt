@@ -1,0 +1,17 @@
+movb $0xF, (%ebx)
+movl %rax, (%rsp)
+movw (%rax),4(%rsp)
+movb %al,%sl
+movq %rax,$0x123
+movl %eax,%rdx
+movb %si, 8(%rbp)
+
+______________________________________
+
+movb $0xF, (%ebx) (использование %ebx при обращении в память)
+movl %rax, (%rsp) (%rax - 8 байт, movl - для 4 байт)
+movw (%rax),4(%rsp) (Memory - memory)
+movb %al,%sl ( %sl - не существует )
+movq %rax,$0x123 (копирование в константу)
+movl %eax,%rdx ( Неверный размер операнда-приемника )
+movb %si, 8(%rbp) (%si - 2 байт, movb - для 1 байт)

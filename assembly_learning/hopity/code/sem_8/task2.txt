@@ -1,0 +1,9 @@
+Xp  i   short
+%rdx    %rcx    %rax
+
+            тип     значение            asm код
+P[1]        short   M(Xp+2)             movw 2(%rdx), %ax
+P+3+i       short*  Xp + 3*2 + i*2      leaq 6(%rdx, %rcx, 2), %rax
+P[i*4 - 5]  short   M(Xp+8*i-10)        movw -10(%rdx, %rcx, 8), %ax
+P[2]        short   M(Xp+4)             movw 4(%rdx), %ax
+&P[i+2]     short*  Xp+2*2+i*2          leaq 4(%rdx, %rcx, 2), %rax

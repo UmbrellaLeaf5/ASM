@@ -1,0 +1,30 @@
+fun_b:
+    movl $64, %edx
+    movl $0, %eax
+    jmp .L2
+.L3:
+    addq %rax, %rax
+    movq %rdi, %rcx
+    andl $1, %ecx
+    orq %rcx, %rax
+    shr %rdi
+    subq $1, %rdx
+.L2:
+    testq %rdx, %rdx
+    jne .L3
+    ret
+
+long fun_b(unsigned long x)
+{
+    long val = 0;
+    for(long i = 64; i != 0; i--)
+    {
+        long temp = x & 0x1;
+        val = (2*val) | temp;
+        x /= 2;
+    }
+    return val;
+}
+
+// Переворачиваем число
+000111 -> 111000

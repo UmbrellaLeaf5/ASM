@@ -1,0 +1,30 @@
+long loop_do_while (long x)
+{
+    long y = x * x;
+    long *p = &x;
+    long n = 4 * x;
+    do
+    {
+        x += y;
+        *p += 5;
+        n -= 2;
+    }
+    while (n > 0);
+    return x;
+}
+
+x initially in %rdi
+loop_do_while:
+    movq %rdi, %rax
+    movq %rdi, %rcx
+    imulq %rdi, %rcx
+    leaq 0(,%rdi,4), %rdx
+.L2:
+    leaq 5(%rcx,%rax), %rax
+    subq $2, %rdx
+    testq %rdx, %rdx
+    jg .L2
+    ret
+
+# leaq 5(%rcx,%rax), %rax <=>   x+=y
+                                *p+=5

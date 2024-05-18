@@ -1,0 +1,1 @@
+g++ -Og -o exe/task2 asm/check_property.s asm/procedure_1.s asm/procedure_2.s asm/string_changer.s c_c++/main.cpp

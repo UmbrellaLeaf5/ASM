@@ -1,0 +1,36 @@
+В следующем варианте функции из листинга 3.2(а) выражения были опущены:
+
+long arith2(long x, long y, long z)
+{
+    long t1 = __________;
+    long t2 = __________;
+    long t3 = __________;
+    long t4 = __________;
+    return t4;
+}
+
+Для этой функции был сгенерирован следующий ассемблерный код:
+    long arith2(long x, long y, long z)
+    x в %rdi, y в %rsi, z в %rdx
+arith2:
+    orq %rsi, %rdi
+    sarq $3, %rdi
+    notq %rdi
+    movq %rdx, %rax
+    subq %rdi, %rax
+    ret
+
+Опираясь на этот ассемблерный код, восстановите выражения в коде на C.
+
+__________________________________________________________________
+
+x <-> %rdi, y <-> %rsi, z <-> %rdx
+
+long arith2(long x, long y, long z)
+{
+    long t1 = y|x;
+    long t2 = t1>>3;
+    long t3 = ~t2;
+    long t4 = z-t3;
+    return t4;
+}

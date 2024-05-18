@@ -1,0 +1,82 @@
+Для следующей функции на C
+
+long test(long x, long y)
+{
+    long val = ________;
+    if ( ________ )
+    {
+        if ( ________ )
+            val = ________;
+        else
+            val = ________;
+    }
+    else if ( ________ )
+        val = ________;
+    return val;
+}
+
+GCC сгенерировал такой ассемблерный код:
+    long test(long x, long y)
+    x <-> %rdi, y <-> %rsi
+test:
+    leaq 0(,%rdi,8), %rax
+    testq %rsi, %rsi
+    jle .L2
+    movq %rsi, %rax
+    subq %rdi, %rax
+    movq %rdi, %rdx
+    andq %rsi, %rdx
+    cmpq %rsi, %rdi
+    cmovge %rdx, %rax
+    ret
+.L2:
+    addq %rsi, %rdi
+    cmpq $-2, %rsi
+    cmovle %rdi, %rax
+    ret
+
+Добавьте недостающие выражения в код на C
+
+__________________________________________________________________________________
+
+
+
+    long test(long x, long y)
+    x <-> %rdi, y <-> %rsi
+test:
+    leaq 0(,%rdi,8), %rax
+    testq %rsi, %rsi
+    jle .L2
+    movq %rsi, %rax
+    subq %rdi, %rax     val = y - x
+    movq %rdi, %rdx
+    andq %rsi, %rdx     val2 = x&y
+    cmpq %rsi, %rdi     x COMP y
+    cmovge %rdx, %rax   if ( x >= y)
+                            val = x & y
+                        else
+                            val = y - x
+    ret
+.L2:
+    addq %rsi, %rdi     x += y
+    cmpq $-2, %rsi      y COMP -2
+    cmovle %rdi, %rax   else if (y <= -2)
+                            val = x+y
+    ret
+
+
+
+long test(long x, long y)
+{
+    long val = 8*x;
+    if (y > 0)
+    {
+        if (x >= y)
+            val = x & y;
+        else
+            val = y - x;
+    }
+    else if (y <= -2)
+        val = x+y;
+    return val;
+}

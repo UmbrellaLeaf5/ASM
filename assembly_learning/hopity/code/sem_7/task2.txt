@@ -1,0 +1,48 @@
+strlen
+
+
+C:
+
+unsigned long str_len(const char* str)
+{
+    unsigned long len = 0;
+    if(str)
+    {
+        while(*str != '\0')
+        {
+            ++len;
+            ++str;
+        }
+    }
+    return len;
+}
+
+asm:
+str_len:
+    movq $0, %rax
+    testq %rdi, %rdi
+    je L1
+    jmp L2
+L1:
+    ret
+L2:
+    testb (%rdi), (%rdi)
+    je L1
+    incq %rax
+    incq %rdi
+    jmp L2
+
+mystrlen:
+    movq $0, %rax
+    testq %rdi, %rdi
+    je L1
+    jmp L2
+L3:
+    incq %rax
+    incq %rdi
+L2:
+    movb (%rdi), %cl
+    testb %cl, $cl
+    jne L3
+L1:
+    ret

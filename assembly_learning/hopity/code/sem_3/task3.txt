@@ -1,0 +1,37 @@
+src_t *sp;
+dest_t *dp;
+
+// typedef int src_t; // %rdi
+// using src_t = int; // %rsi
+
+*dp = (dest_t) *sp;
+
+Задание: написать инструкцию, реализующую это
+
+src_t           dest_t        инструкция
+long            long          movq   (%rdi), %rax
+                              movq    %rax, (%rsi)
+
+char            int           movsbl (%rdi), %eax
+                              movl    %eax, (%rsi)
+
+char            unsigned      movsbl (%rdi), %eax
+                              movl    %eax, (%rsi)
+
+unsigned char   long          movzbq (%rdi), %rax
+                              movq    %rax, (%rsi)
+
+int             char          movl   (%rdi), %eax
+                              movb    %al,  (%rsi)
+
+unsigned        unsigned char movl   (%rdi), %eax
+                              movb    %al,  (%rsi)
+
+
+char            short         movsbw (%rdi), %ax
+                              movw    %ax,  (%rsi)
+
+V     V
+ V   V
+  V V
+   V

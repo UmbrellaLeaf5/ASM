@@ -1,0 +1,21 @@
+long scale2(long x, long y, long z) {
+    long t = ___________________;
+    return t;
+}
+
+В результате компиляции фактической функции GCC дает следующий ассемблерный код:
+    long scale2(long x, long y, long z)
+    x в %rdi, y в %rsi, z в %rdx
+scale2:
+    leaq (%rdi,%rdi,4), %rax
+    leaq (%rax,%rsi,2), %rax
+    leaq (%rax,%rdx,8), %rax
+    ret
+
+Подставьте пропущенное выражение в исходный код на C.
+__________________________________________________________________
+
+long scale2(long x, long y, long z) {
+    long t = 5x+2y;
+    return t;
+}

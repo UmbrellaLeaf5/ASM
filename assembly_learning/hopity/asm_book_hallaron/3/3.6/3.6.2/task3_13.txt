@@ -1,0 +1,24 @@
+Код на C
+
+int comp(data_t a, data_t b)
+{
+    return a COMP b;
+}
+
+a <-> %rdi; b <-> %rsi
+
+1.cmpl %esi, %edi
+    setl %al
+2.cmpw %si, %di
+    setge %al
+3.cmpb %sil, %dil
+    setbe %al
+4.cmpq %rsi, %rdi
+    setne %al
+
+__________________________________________________________________
+
+1.  a < b   int a, int b
+2.  a >= b  short a, short b
+3.  a <= b  unsigned char a, unsigned char b
+4.  a != b  long long a, long long b / unsigned long long a, unsigned long long b

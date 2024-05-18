@@ -1,0 +1,12 @@
+long fun_a (unsigned long x)
+{
+    long val = 0;
+    while (x >= 0)
+    {
+        val ^= x;
+        x /= 2;
+    }
+    return val & 0x1;
+}
+
+чётность нечётность кол-ва единиц

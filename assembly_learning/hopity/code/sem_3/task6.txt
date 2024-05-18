@@ -1,0 +1,17 @@
+long long shift_left4_rightn (long long x, long long n)
+{
+    x <<= 4;
+    x >>= n;
+    return x;
+}
+
+x : %rdi                (-mabi-sysv)
+n: %rsi
+
+movq    %rdi, %rax        # get x
+salq    $0x4, %rax        # x <<= 4
+movl    %esi, %ecx        # get n
+sarq    %cl,  %rax        # x >>= n
+movq    %rsi, %rcx
+
+(%cl, потому что после 64 сдвигов число обнулится)

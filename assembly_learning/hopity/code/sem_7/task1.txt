@@ -1,0 +1,22 @@
+long rfun (unsigned long x)
+{
+    if (x == 0)
+        return 0;
+    unsigned long nx = x >> 2;
+    long rv = rfun(nx);
+    return x + rv;
+}
+
+rfun:
+    testq %rdi, %rdi
+    jne .L8
+    movl $0, %eax
+    ret
+.L8:
+    pushq %rbx
+    movq %rdi, %rbx
+    shrq $2, %rdi
+    call rfun
+    addq %rbx, %rax
+    popq %rbx
+    ret

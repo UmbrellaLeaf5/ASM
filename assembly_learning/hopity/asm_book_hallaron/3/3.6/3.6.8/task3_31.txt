@@ -1,0 +1,98 @@
+Для функции switcher со следующей структурой:
+
+void switcher(long a, long b, long c, long *dest)
+{
+    long val;
+    switch(a) {
+        case ________:      /* Вариант A */
+            c = ________;
+            /* проваливается далее */
+        case ________:      /* Вариант B */
+            val = ________;
+            break;
+        case ________:      /* Вариант C */
+        case ________:      /* Вариант D */
+            val = ________;
+            break;
+        case ________:      /* Вариант E */
+            val = ________;
+            break;
+        default:
+            val = ________;
+    }
+    *dest = val;
+}
+
+компилятор GCC сгенерировал ассемблерный код и таблицу переходов, показанные в листинге 3.10.
+Заполните недостающие фрагменты в коде на C. За исключением порядка следования
+меток C и D, есть только один способ расположить разные варианты в шаблоне.
+
+
+Листинг 3.10. Ассемблерный код и таблица переходов для упражнения 3.31
+(a) Код
+    void switcher(long a, long b, long c, long *dest)
+    a <-> %rdi, b <-> %rsi, c <-> %rdx, dest <-> %rcx
+switcher:
+    cmpq $7, %rdi
+    ja .L2
+    jmp *.L4(,%rdi,8)
+    .section .rodata
+.L7:
+    xorq $15, %rsi
+    movq %rsi, %rdx
+.L3:
+    leaq 112(%rdx), %rdi
+    jmp .L6
+.L5:
+    leaq (%rdx,%rsi), %rdi
+    salq $2, %rdi
+    jmp .L6
+.L2:
+    movq %rsi, %rdi
+.L6:
+    movq %rdi, (%rcx)
+    ret
+(b) Таблица переходов
+.L4:
+    .quad .L3
+    .quad .L2
+    .quad .L5
+    .quad .L2
+    .quad .L6
+    .quad .L7
+    .quad .L2
+    .quad .L5
+
+__________________________________________________________________________________
+
+0       .L3 (B)
+1       .L2 (default)
+2       .L5 (C)
+3       .L2 (default)
+4       .L6 (E)
+5       .L7 (A)
+6       .L2 (default)
+7       .L5 (D)
+
+void switcher(long a, long b, long c, long *dest)
+{
+    long val;
+    switch(a) {
+        case 5:      /* Вариант A */    (.L7)
+            c = (b^15);
+            /* проваливается далее */
+        case 0:      /* Вариант B */    (.L3)
+            val = 112+c;
+            break;
+        case 2:      /* Вариант C */    (.L5)
+        case 7:      /* Вариант D */    (.L5)
+            val = (b+c)*4;
+            break;
+        case 4:      /* Вариант E */    (.L6)
+            val = a;
+            break;
+        default:                        (.L2)
+            val = b;
+    }
+    *dest = val;
+}

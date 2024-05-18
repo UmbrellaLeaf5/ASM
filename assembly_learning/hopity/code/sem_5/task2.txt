@@ -1,0 +1,16 @@
+(a) testq %rdi, %rdi
+    setge %al
+a >= 0, 8 байт, long long, знаковый
+
+(б) testw %di, %di
+    sete %al
+
+a == 0, 2 байт, short, unsigned short, знаковый, беззнаковый
+
+(в) testb %dil, %dil
+    seta %al
+a > 0 1 байт, unsigned char, беззнаковый
+
+(г) testl %edi, %edi
+    setle %al
+a <= 0, 4 байт, int, знаковый

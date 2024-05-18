@@ -1,0 +1,8 @@
+long long t1 = x^y;            z: %rdx
+long long t2 = z*48;           x: %rdi
+                               y: %rdx
+
+xorq %rsi, %rdi
+leaq (%rdx, %rdx, 2), %rdx  #3z
+movq %rdx, %rax
+salq $4, %rax

@@ -1,0 +1,34 @@
+void switch2(long x, long* dest)
+{
+    long val = 0;
+    switch(x)
+    {
+        ...
+    }
+    *dest = val;
+}
+
+swtich2:
+    addq $1, %rdi       x+1
+    cmpq $8, %rdi       x+1 ? 8
+    ja .L2              x+1 > 8 -> default
+    jmp *.L4(, %rdi, 8)
+
+    .rodata
+.L4:
+-1          .quad .L9
+0           .quad .L5 *
+1           .quad .L6
+2           .quad .L7 !
+default     .quad .L2
+4           .quad .L7 !
+5           .quad .L8
+default     .quad .L2
+7           .quad .L5 *
+
+(1) значения меток ?
+
+(2) варианты в неск меток?
+
+min = -1
+max = 7

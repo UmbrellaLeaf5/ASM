@@ -1,0 +1,57 @@
+Для кода на языке C
+
+long dw_loop(long x)
+{
+    long y = x*x;
+    long *p = &x;
+    long n = 2*x;
+    do
+    {
+        x += y;
+        (*p)++;
+        n--;
+    } while (n > 0);
+    return x;
+}
+
+GCC сгенерировал следующий ассемблерный код:
+
+    long dw_loop(long x)
+    x <-> %rdi
+dw_loop:
+    movq %rdi, %rax
+    movq %rdi, %rcx
+    imulq %rdi, %rcx
+    leaq (%rdi,%rdi), %rdx
+.L2:
+    leaq 1(%rcx,%rax), %rax
+    subq $1, %rdx
+    testq %rdx, %rdx
+    jg .L2
+    rep; ret
+
+1. Какие регистры используются для хранения значений переменных x, y и n?
+2. Как компилятор избавился от необходимости в переменной-указателе p и от разыменования указателя, подразумеваемого выражением (*p)++?
+3. Добавьте комментарии в ассемблерный код, описывающие работу программы, как это
+сделано в листинге 3.5 (c).
+
+__________________________________________________________________________________
+
+1. x <-> %rdi, %rax, y <-> %rcx, n <-> %rdx
+2. leaq 1(%rcx, %rax), %rax <=> x += y+1 <=> { x += y, (*(&x))++; } <=> { x += y, (*p)++; }
+3.
+
+    long dw_loop(long x)
+    x <-> %rdi
+dw_loop:
+    movq %rdi, %rax             # x = x ?
+    movq %rdi, %rcx             # y = x;
+    imulq %rdi, %rcx            # y *= x;
+    leaq (%rdi,%rdi), %rdx      # n = 2*x;
+.L2:
+    leaq 1(%rcx,%rax), %rax     # x += y;
+                                # (*p)++;
+    subq $1, %rdx               # n--;
+    testq %rdx, %rdx            # n COMP 0
+    jg .L2                      # while(n > 0);
+    rep; ret

@@ -1,0 +1,19 @@
+Код на C
+
+int test(data_t a)
+{
+    return a TEST 0;
+}
+
+a <-> %rdi
+
+1.testq %rdi, %rdi
+ setge %al
+2.testw %di, %di
+ sete %al
+3.testb %dil, %dil
+ seta %al
+4.testl %edi, %edi
+ setle %al
+
+___________________________________________________________________

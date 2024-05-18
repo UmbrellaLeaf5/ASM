@@ -1,0 +1,46 @@
+%rdx 8 movq
+%edx 4 movl
+%dx  2 movw
+%dl  1 movb
+
+регистр - участок в памяти процессора
+
+movzlq нет, ибо movl учитывает
+
+Арифметические и логические операции
+
+leaq S, R   R <- &S  загрузить действительный адрес (S - источник, R - приёмник, обращение по памяти)
+lea[q] - других не существует, т.к. адрес всегда 8 байт
+load effective address
+
+inc        D        D <- D+1
+dec        D        D <- D-1
+neg        D        D <- -D
+not        D        D <- ~D
+
+add        S,D      D <- D+S
+sub        S,D      D <- D-S
+imul       S,D      D <- D*S
+xor        S,D      D <- D^S
+or         S,D      D <- D|S
+and        S,D      D <- D&S
+
+sal        k,D      D <- D << k    // k - константа либо %al
+shl        k,D      D <- D << k
+sar        k,D      D <- D >>(arithm)  k
+shl        k,D      D <- D >>(logical) k
+
+сдвиг влево:
+001...101 -> (сдвиг влево) [CF] (carry flag) 0 01...1010
+
+сдвиг вправо логический:
+101...101 -> (сдвиг вправо) 0101...10 [1, CF]
+сдвиг вправо арифметический:
+101...101 -> (сдвиг вправо) 1101...10 1 [1, CF]
+
+imulq   S    R[%rdx]R[%rax] <- S*R[%rax]    с учётом знака
+mulq    S    R[%rdx]R[%rax] <- S*R[%rax]    без учёта знака
+
+cqto         R[%rdx]R[%rax] <- SignExtend(R[%rax])
+idivq   S    R[%rdx] <- R[%rdx]R[%rax] mod S
+divq         R[%rax] <- R[%rdx]R[%rax] div S

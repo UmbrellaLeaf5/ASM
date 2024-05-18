@@ -1,0 +1,7 @@
+movl %cax, (%rsp)
+movw (%rax), %dx (dx - 2 байт)
+movb $0xFF, %bl
+movb (%rsp, %rdx, 4), %dl
+movq (%rdx), %rax
+movw %dx, (%rax) 
+

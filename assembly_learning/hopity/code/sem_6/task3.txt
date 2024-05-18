@@ -1,0 +1,59 @@
+case A 5                    0   .L7
+    c = b^15;               1   .L2 = default
+case B 0                    2   .L3
+    val = 112 + c;          3   .L2 = default
+    break;                  4   .L6
+case C 2                    5   .L5
+case D 7                    6   .L2
+    val = (b+c)<<2;         7   .L3
+case E 4
+    val = a;
+default
+    val = b;
+
+
+a: %rdi, b: %rsi, c: %rdx, d: %rcx
+switcher:
+    cmpq $7, %rdi
+    ja .L2
+    jmp *.L4(,%rdi,8)
+    .section .rodata
+    .align 8
+    .align 4
+.L4:
+    .quad .L7
+    .quad .L2
+    .quad .L3
+    .quad .L2
+    .quad .L6
+    .quad .L5
+    .quad .L2
+    .quad .L3
+    .text
+.L6:
+    movq %rdi, %rsi
+    jmp .L2
+.L5:
+    movq %rsi, %rdx
+    xorq $15, %rdx
+.L7:
+    leaq 112(%rdx), %rsi
+.L2:
+    movq %rsi, (%rcx)
+    ret
+.L3:
+    addq %rdx, %rsi
+    salq $2, %rsi
+    jmp .L2
+
+
+cmpq $7, %rdi
+ja .L2
+leaq .L4(%rip), %r8
+movslq (%r8, %rdi, 4), %rax
+addq %r8, %rax
+jmp *%rax    
+
+.rodata
+.L4:
+    .long .L7 - .L4
