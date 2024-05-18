@@ -1,0 +1,3 @@
+[submodule "formal_algo/state_machine/state_machines_executor"]
+	path = formal_algo/state_machine/state_machines_executor
+	url = https://github.com/UmbrellaLeaf5/state_machines_executor
