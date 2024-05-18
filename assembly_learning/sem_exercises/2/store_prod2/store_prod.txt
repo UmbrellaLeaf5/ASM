@@ -1,0 +1,38 @@
+
+store_prod.o:     file format pe-x86-64
+
+
+Disassembly of section .text:
+
+0000000000000000 <store_prod>:
+   0:	48 89 f9             	mov    %rdi,%rcx
+   3:	48 89 f0             	mov    %rsi,%rax
+   6:	49 89 d3             	mov    %rdx,%r11
+   9:	49 c1 fb 3f          	sar    $0x3f,%r11
+   d:	49 89 f1             	mov    %rsi,%r9
+  10:	49 c1 f9 3f          	sar    $0x3f,%r9
+  14:	4c 89 ce             	mov    %r9,%rsi
+  17:	48 0f af f2          	imul   %rdx,%rsi
+  1b:	4c 89 df             	mov    %r11,%rdi
+  1e:	48 0f af f8          	imul   %rax,%rdi
+  22:	48 01 fe             	add    %rdi,%rsi
+  25:	48 f7 e2             	mul    %rdx
+  28:	48 01 f2             	add    %rsi,%rdx
+  2b:	48 89 01             	mov    %rax,(%rcx)
+  2e:	48 89 51 08          	mov    %rdx,0x8(%rcx)
+  32:	48 c7 01 00 00 00 00 	movq   $0x0,(%rcx)
+  39:	48 c7 41 08 00 00 00 	movq   $0x0,0x8(%rcx)
+  40:	00 
+  41:	48 31 c9             	xor    %rcx,%rcx
+  44:	c3                   	ret
+  45:	90                   	nop
+  46:	90                   	nop
+  47:	90                   	nop
+  48:	90                   	nop
+  49:	90                   	nop
+  4a:	90                   	nop
+  4b:	90                   	nop
+  4c:	90                   	nop
+  4d:	90                   	nop
+  4e:	90                   	nop
+  4f:	90                   	nop

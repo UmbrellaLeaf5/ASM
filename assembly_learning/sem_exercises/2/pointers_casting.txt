@@ -1,0 +1,18 @@
+typedef int src_t;
+*dp = dest_t(*sp);
+
+src_t            dest_t                 asm-commands
+long             long                   movq (%rdi), %rax
+                                        movq %rax, (%rsi)
+char             int                    movsbl (%rdi), %eax
+                                        movl %eax, (%rsi)
+char             unsigned int           movsbl (%rdi), %eax
+                                        movl %eax, (%rsi)
+unsigned char    long                   movzbq (%rdi), %rax
+                                        movq %rax, (%rsi)
+int              char                   movl (%rdi), %eax
+                                        movb %al, (%rsi)
+unsigned int     unsigned char          movl (%rdi), %eax
+                                        movb %al, (%rsi)
+char             short                  movsbw (%rdi), %ax
+                                        movw %ax, (%rsi)

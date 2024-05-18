@@ -1,0 +1,15 @@
+
+shift_left4_rightn.o:     file format pe-x86-64
+
+
+Disassembly of section .text:
+
+0000000000000000 <shift_left4_right_n>:
+   0:	48 89 c8             	mov    %rcx,%rax
+   3:	48 c1 e0 04          	shl    $0x4,%rax
+   7:	89 d1                	mov    %edx,%ecx
+   9:	48 d3 f8             	sar    %cl,%rax
+   c:	c3                   	ret
+   d:	90                   	nop
+   e:	90                   	nop
+   f:	90                   	nop

@@ -1,0 +1,15 @@
+
+loop.o:     file format pe-x86-64
+
+
+Disassembly of section .text:
+
+0000000000000000 <.text>:
+   0:	48 89 f8             	mov    %rdi,%rax
+   3:	eb 03                	jmp    8 <.text+0x8>
+   5:	48 d1 f8             	sar    %rax
+   8:	48 85 c0             	test   %rax,%rax
+   b:	7f f8                	jg     5 <.text+0x5>
+   d:	c3                   	ret
+   e:	90                   	nop
+   f:	90                   	nop
