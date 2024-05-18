@@ -1,3 +1,6 @@
 [submodule "formal_algo/state_machine/state_machines_executor"]
 	path = formal_algo/state_machine/state_machines_executor
 	url = https://github.com/UmbrellaLeaf5/state_machines_executor
+[submodule "assembly_learning/assembly_text_task"]
+	path = assembly_learning/assembly_text_task
+	url = https://github.com/UmbrellaLeaf5/assembly_text_task
